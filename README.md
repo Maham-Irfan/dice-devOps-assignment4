@@ -12,13 +12,7 @@
 
 
 ## Step 2: Kubernetes
-* Minikube was installed using the following command in the shell by running it as an administrator
-    
-    "$oldPath = [Environment]::GetEnvironmentVariable('Path', [EnvironmentVariableTarget]::Machine)
-    if ($oldPath.Split(';') -inotcontains 'C:\minikube'){
-    [Environment]::SetEnvironmentVariable('Path', $('{0};C:\minikube' -f $oldPath), [EnvironmentVariableTarget]::Machine)
-    }
-    "
+* Minikube was installed by executing the commands specified in the official documentation in the shell by running it as an administrator
 * The command "minikube start" was executed to start the kubernetes server
 * The command "kubectl version" was executed to check the version of kubectl
 * A new file was added in the project's root directory "postgres-deployment.yaml" along with "postgres-secret.yaml". The secrets file contains the database username, password and database server name. The deployment file contains the specifications of the pod and the postgres image that must be pulled in the container in the pod to run the database server. The service file was appended in the deployment file and the type was given as "Clustor IP"
