@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: thirddep
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: "Never"
           image: assignment
           ports:
           - containerPort: 3000

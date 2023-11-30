@@ -64,14 +64,30 @@
 * The local docker daemon was connected to the minikube's docker daemon using the command "minikube docker-env" so all the images built using the build command would be stored inside the minikube's local repository
 * The image "assigment" was build again using "docker build -t assignment ."
 * After the creation of each file, the command "kubectl apply -f [file.yaml]" was executed. The file.yaml file contains the name of the three deployment files and the secret file and the commands "kubectl get deployments" and "kubectl get pods" was executed to check the status of each deployment and pod
-* The command "minikube service next-service" was run to access the external IP that gets assigned to this deployment so that it can be viewed on the web using this IP address along with the port speicified in the yaml file for this deployment
-* The command "kubectl apply -f next-deployment.yaml" was executed again after deleting the previous version to apply the new external IP to the service
-* The external IP was accessed using the command "kubectl get svc next-service"
+* The "minikube tunnel" command was executed in the command prompt, which makes the external IP visible and accessible. This command asks for the password which can be reset using the following lines of code in the command prompt by running it as an administrator
+        $ minikube ssh
+        docker@minikube:~$ sudo su -
+        root@minikube:~# passwd docker
+        New password:    # <-- you can set any password
+        Retype new password:
+        passwd: password updated successfully
+        root@minikube:~# logout
+        docker@minikube:~$ logout
+        $ minikube tunnel
+        Starting tunnel for service balanced.
+        docker@127.0.0.1's password:  # <-- this should accept above password
+        * The external IP was accessed using the command "kubectl get svc next-service"
 
 * Deployments: 
 ![Image Alt text](/public/images/k8s.JPG "Deployments")
 
 * Services:
 ![Image Alt text](/public/images/services.JPG "Services")
+
+* Pods:
+![Image Alt text](/public/images/pods.JPG "Pods")
+
+* Application running and accessed outside of the cluster using the external IP:
+![Image Alt text](/public/images/application-running.JPG "Deployment")
 
 * The difference between the three services i.e., The Cluster IP, NodePort and LoadBalancer is that the ClusterIP service creates a virtual IP inside the Kubernetes cluster that can route traffic to pods matching the service selector. It's meant for internal communication between services within the cluster. External traffic from outside the cluster can't directly reach pods exposed through ClusterIP whereas the NodePort service exposes a specific port on all nodes in the cluster. This port is then forwarded to the service, which further directs traffic to the pods. External clients can access the pods by using the NodeIP and the assigned port. The load balancer has two purposes, it is responsible for distributing traffic to the pods within the cluster and it enables external clients to access the pods by hitting the load balancer's IP.
