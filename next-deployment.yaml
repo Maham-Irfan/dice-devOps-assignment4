@@ -17,6 +17,7 @@ spec:
       containers:
         - name: next
           image: assignment
+          imagePullPolicy: Never
           ports:
           - containerPort: 8081
 
